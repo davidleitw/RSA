@@ -69,3 +69,10 @@ func Decrypt(message *big.Int, privateKey *PrivateKey) *big.Int {
 	var value *big.Int = &big.Int{}
 	return value.Exp(message, privateKey.D, privateKey.N)
 }
+
+func GCD(a, b int) int {
+	if b == 0 {
+		return a
+	}
+	return GCD(b, a%b)
+}

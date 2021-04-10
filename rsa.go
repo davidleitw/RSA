@@ -40,11 +40,11 @@ func GenerateRSAKey() (*PublicKey, *PrivateKey, error) {
 
 	EulerN := &big.Int{}
 	EulerN = EulerN.Mul(p.Sub(p, bigOne), q.Sub(q, bigOne))
+	E := big.NewInt(65537)
 
-	publicKey := &PublicKey{N: n, E: big.NewInt(65537)}
-	_, x, _ := ExtendedGCD(publicKey.E, EulerN)
+	_, x, _ := ExtendedGCD(E, EulerN)
 	d := x.Add(x, EulerN)
-
+	publicKey := &PublicKey{N: n, E: E}
 	privateKey := &PrivateKey{N: n, D: d}
 
 	return publicKey, privateKey, nil
@@ -61,13 +61,11 @@ func ExtendedGCD(a, b *big.Int) (*big.Int, *big.Int, *big.Int) {
 }
 
 func Encrypt(message *big.Int, publicKey *PublicKey) *big.Int {
-	var value *big.Int = &big.Int{}
-	return value.Exp(message, publicKey.E, publicKey.N)
+	return big.NewInt(0).Exp(message, publicKey.E, publicKey.N)
 }
 
 func Decrypt(message *big.Int, privateKey *PrivateKey) *big.Int {
-	var value *big.Int = &big.Int{}
-	return value.Exp(message, privateKey.D, privateKey.N)
+	return big.NewInt(0).Exp(message, privateKey.D, privateKey.N)
 }
 
 func GCD(a, b int) int {

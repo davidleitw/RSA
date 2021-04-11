@@ -35,12 +35,9 @@ func GenerateRSAKey() (*PublicKey, *PrivateKey, error) {
 		}
 	}
 
-	n := &big.Int{}
-	n = n.Mul(p, q)
-
-	EulerN := &big.Int{}
-	EulerN = EulerN.Mul(p.Sub(p, bigOne), q.Sub(q, bigOne))
+	n := big.NewInt(0).Mul(p, q)
 	E := big.NewInt(65537)
+	EulerN := big.NewInt(0).Mul(p.Sub(p, bigOne), q.Sub(q, bigOne))
 
 	_, x, _ := ExtendedGCD(E, EulerN)
 	d := x.Add(x, EulerN)

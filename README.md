@@ -41,10 +41,14 @@ RSA加密演算法是一種非對稱加密演算法，非對稱加密的特色�
 - 計算![](https://render.githubusercontent.com/render/math?math=e)相對於![](https://render.githubusercontent.com/render/math?math=\varphi(n))的模反元素![](https://render.githubusercontent.com/render/math?math=d)拿來當作私鑰
 
 ![](https://render.githubusercontent.com/render/math?math=ed\equiv\1\(mod\\varphi(n)))
+
 所以可以得出
+
 ![](https://render.githubusercontent.com/render/math?math=ed\=\k\varphi(n)+1)
+
 移項得到
-$ed - k\varphi(n) = 1$
+
+![](https://render.githubusercontent.com/render/math?math=ed-k\varphi(n\)=1)
 // 待補，接著需要使用擴展歐幾里得算法
 
 

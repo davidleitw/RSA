@@ -33,12 +33,12 @@ RSA加密演算法是一種非對稱加密演算法，非對稱加密的特色�
 ![](https://render.githubusercontent.com/render/math?math=\varphi(n)=(p-1)*(q-1))
 - 選擇一個整數 **e**(拿來當作公鑰)
     - 選擇條件
-        - $1 < e < \varphi(n)$
-        - $e$與$\varphi(n)$互質
+        - ![](https://render.githubusercontent.com/render/math?math=1<e<\varphi(n))
+        - ![](https://render.githubusercontent.com/render/math?math=e與\varphi(n))互質
 
 參考資料[Can the encryption exponent e be greater than ϕ(N)?](https://crypto.stackexchange.com/questions/5729/can-the-encryption-exponent-e-be-greater-than-%CF%95n)
 
-- 計算$e$相對於$\varphi(n)$的模反元素$d$拿來當作私鑰
+- 計算![](https://render.githubusercontent.com/render/math?math=e)相對於![](https://render.githubusercontent.com/render/math?math=\varphi(n))的模反元素![](https://render.githubusercontent.com/render/math?math=d)拿來當作私鑰
 $ed \equiv 1 \ (mod \ \varphi(n))$
 所以可以得出
 $ed = k\varphi(n) + 1$

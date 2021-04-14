@@ -30,7 +30,7 @@ RSA加密演算法是一種非對稱加密演算法，非對稱加密的特色�
 - 選出兩個較大的質數 ![](https://render.githubusercontent.com/render/math?math=p), ![](https://render.githubusercontent.com/render/math?math=q)
 - 計算兩個質數的乘積 ![](https://render.githubusercontent.com/render/math?math=n\=p*q)
 - 計算出小於 n 且與 n 互質的整數個數 
-![](https://render.githubusercontent.com/render/math?math=varphi\(n)\=\(p-1)*(q-1))
+![](https://render.githubusercontent.com/render/math?math=\varphi(n)=(p-1)*(q-1))
 - 選擇一個整數 **e**(拿來當作公鑰)
     - 選擇條件
         - $1 < e < \varphi(n)$

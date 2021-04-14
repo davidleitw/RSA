@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"math/big"
 
@@ -19,7 +18,11 @@ func main() {
 	log.Println("secret = ", secret)
 
 	m := RSA.Decrypt(secret, private)
-	log.Println("Afert Decrypt: ", m)
+	log.Println("After Decrypt: ", m)
 
-	fmt.Println(RSA.GCD(75, 15))
+	message2 := big.NewInt(int64(9876554321))
+	log.Println("secret = ", message2.Exp(message2, private.D, private.N))
+
+	m = big.NewInt(0).Exp(message2, public.E, public.N)
+	log.Println("After Decrypt: ", m)
 }

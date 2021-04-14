@@ -33,7 +33,7 @@ RSA加密演算法是一種非對稱加密演算法，非對稱加密的特色�
 ![](https://render.githubusercontent.com/render/math?math=\varphi(n)=(p-1)*(q-1))
 - 選擇一個整數 **e**(拿來當作公鑰)
     - 選擇條件
-        - ![](http://latex2png.com/pngs/f98eb09117fe45ddd6dff309563f9bd2.png)
+        - ![](http://latex2png.com/pngs/09a45901a0d7706bbc325d94d0cdb977.png)
         - ![](https://render.githubusercontent.com/render/math?math=e\,\varphi(n))互質
 
 參考資料[Can the encryption exponent e be greater than ϕ(N)?](https://crypto.stackexchange.com/questions/5729/can-the-encryption-exponent-e-be-greater-than-%CF%95n)

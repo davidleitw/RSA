@@ -24,31 +24,31 @@ RSA加密演算法是一種非對稱加密演算法，非對稱加密的特色�
 > RSA加密演算法是一種非對稱加密演算法，在公開金鑰加密和電子商業中被廣泛使用。RSA是由羅納德·李維斯特（Ron Rivest）、阿迪·薩莫爾（Adi Shamir）和倫納德·阿德曼（Leonard Adleman）在1977年一起提出的。當時他們三人都在麻省理工學院工作。RSA 就是他們三人姓氏開頭字母拼在一起組成的。
 
 ![](https://i.imgur.com/lE7U7Ky.png)
+
 [圖片來源](https://www.techapple.com/archives/25855)
 
 ### 金鑰計算方式
 - 選出兩個較大的質數 ![](https://render.githubusercontent.com/render/math?math=p), ![](https://render.githubusercontent.com/render/math?math=q)
 - 計算兩個質數的乘積 ![](https://render.githubusercontent.com/render/math?math=n\=p*q)
 - 計算出小於 n 且與 n 互質的整數個數 
+
 ![](https://render.githubusercontent.com/render/math?math=\varphi(n)=(p-1)*(q-1))
 - 選擇一個整數 **e**(拿來當作公鑰)
     - 選擇條件
         - ![](https://latex2image-output.s3.amazonaws.com/img-heUvAk9X.svg)
-        - ![](https://render.githubusercontent.com/render/math?math=e\,\varphi(n))互質
+        - ![](https://latex2image-output.s3.amazonaws.com/img-VRHdeXUh.svg)互質
 
-參考資料[Can the encryption exponent e be greater than ϕ(N)?](https://crypto.stackexchange.com/questions/5729/can-the-encryption-exponent-e-be-greater-than-%CF%95n)
+- 計算![](https://latex2image-output.s3.amazonaws.com/img-D6h1FGmQ.svg)相對於![](https://latex2image-output.s3.amazonaws.com/img-YS3FV8Jy.svg)的模反元素![](https://latex2image-output.s3.amazonaws.com/img-5VfEC4JX.svg)拿來當作私鑰
 
-- 計算![](https://render.githubusercontent.com/render/math?math=e)相對於![](https://render.githubusercontent.com/render/math?math=\varphi(n))的模反元素![](https://render.githubusercontent.com/render/math?math=d)拿來當作私鑰
-
-![](https://render.githubusercontent.com/render/math?math=ed\equiv\1\(mod\\varphi(n)))
+  ![](https://latex2image-output.s3.amazonaws.com/img-GZ2f81vt.svg)
 
 所以可以得出
 
-![](https://render.githubusercontent.com/render/math?math=ed\=\k\varphi(n)+1)
+  ![](https://latex2image-output.s3.amazonaws.com/img-7sZ11Wd4.svg)
 
 移項得到
 
-![](https://render.githubusercontent.com/render/math?math=ed-k\varphi(n\)=1)
+![](https://latex2image-output.s3.amazonaws.com/img-S7BEqV2x.svg)
 // 待補，接著需要使用擴展歐幾里得算法
 
 
@@ -56,8 +56,8 @@ RSA加密演算法是一種非對稱加密演算法，非對稱加密的特色�
 [來源](https://ithelp.ithome.com.tw/articles/10250721)
 
 經過上述求金鑰的過程，可以得到
-- 公鑰 ${e, n}$
-- 私鑰 ${k, n}$
+- 公鑰 ![](https://latex2image-output.s3.amazonaws.com/img-MWWWYstf.svg)
+- 私鑰 ![](https://latex2image-output.s3.amazonaws.com/img-qJFBdKjw.svg)
 
 ### 議題: 如何選擇質數
 
@@ -89,3 +89,4 @@ private static final int SMALL_PRIME_THRESHOLD = 95;
 - [RSA 的原理與實現](https://cjting.me/2020/03/13/rsa/)
 - [看完眼眶濕濕的App開發者慘烈對抗險惡資安環境血與淚的控訴！](https://ithelp.ithome.com.tw/users/20117445/ironman/3778?page=2)
 - [對稱密鑰加密](https://zh.wikipedia.org/wiki/%E5%B0%8D%E7%A8%B1%E5%AF%86%E9%91%B0%E5%8A%A0%E5%AF%86)
+- [Can the encryption exponent e be greater than ϕ(N)?](https://crypto.stackexchange.com/questions/5729/can-the-encryption-exponent-e-be-greater-than-%CF%95n)

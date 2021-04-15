@@ -30,7 +30,8 @@ RSA加密演算法是一種非對稱加密演算法，非對稱加密的特色�
 ### 金鑰計算方式
 - 選出兩個較大的質數 ![](https://render.githubusercontent.com/render/math?math=p), ![](https://render.githubusercontent.com/render/math?math=q)
 - 計算兩個質數的乘積 ![](https://render.githubusercontent.com/render/math?math=n\=p*q)
-- 計算出小於 n 且與 n 互質的整數個數 
+- 計算出小於 n 且與 n 互質的整數個數
+   
   ![](https://render.githubusercontent.com/render/math?math=\varphi(n)=(p-1)*(q-1))
 - 選擇一個整數 **e**(拿來當作公鑰)
     - 選擇條件
@@ -38,12 +39,18 @@ RSA加密演算法是一種非對稱加密演算法，非對稱加密的特色�
         - ![](https://latex2image-output.s3.amazonaws.com/img-VRHdeXUh.svg)互質
 
 - 計算![](https://latex2image-output.s3.amazonaws.com/img-D6h1FGmQ.svg)相對於![](https://latex2image-output.s3.amazonaws.com/img-YS3FV8Jy.svg)的模反元素![](https://latex2image-output.s3.amazonaws.com/img-5VfEC4JX.svg)拿來當作私鑰
+  
   ![](https://latex2image-output.s3.amazonaws.com/img-rNB5W1k7.svg)
+
   所以可以得出
+
   ![](https://latex2image-output.s3.amazonaws.com/img-7sZ11Wd4.svg)
+
   移項得到
+
   ![](https://latex2image-output.s3.amazonaws.com/img-S7BEqV2x.svg)
-// 待補，接著需要使用擴展歐幾里得算法
+
+  // 待補，接著需要使用擴展歐幾里得算法
 
 
 ![](https://i.imgur.com/im4zugs.png)

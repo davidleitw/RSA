@@ -63,6 +63,9 @@ RSA加密演算法是一種非對稱加密演算法，非對稱加密的特色�
 ### 議題: 如何選擇質數
 
 先討論只選擇一個質數的情況，假設我們今天要一個 $x$ 位元的質數，我們可以隨機挑一個 $x$ 位元的奇數，然後使用質數判斷法來確認隨機選取的數是不是質數。如果不是質數則在重新選取一次。
+我一開始看到這種作法會認為隨機挑選應該是很沒有效率的作法，後來查了一些資料，質數的佔比其實比想像中的還要多，詳細數據可以參考[質數計算函數](https://zh.wikipedia.org/wiki/%E7%B4%A0%E6%95%B0%E8%AE%A1%E6%95%B0%E5%87%BD%E6%95%B0)。
+
+如果使用隨機挑選的作法，效能瓶頸就最有可能出現在判斷一個數是不是質數這個動作，參考了一篇文章[\[8\]](https://www.zhihu.com/question/54779059)裡面用 Java 的 [Bouncy Castle lib(一個密碼學相關的函式庫)](https://github.com/bcgit/bc-java) 作為舉例。
 
 ```java
 public BigInteger(int bitLength, int certainty, Random rnd) {
@@ -83,11 +86,60 @@ public BigInteger(int bitLength, int certainty, Random rnd) {
 private static final int SMALL_PRIME_THRESHOLD = 95;
 ```
 
+一般為了追求效率，會根據給定的 bit 數來決定使用什麼方法來確定隨機產生的數是不是質數。
+
+```java
+// smallPrime function
+// Do expensive test if we survive pre-test (or it's inapplicable)
+if (p.primeToCertainty(certainty, rnd))
+    return p;
+```
+
+```java
+/**
+ * Find a random number of the specified bitLength that is probably prime.
+ * This method is more appropriate for larger bitlengths since it uses
+ * a sieve to eliminate most composites before using a more expensive
+ * test.
+ */
+    private static BigInteger largePrime(int bitLength, int certainty, Random rnd) {
+    BigInteger p;
+    p = new BigInteger(bitLength, rnd).setBit(bitLength-1);
+    p.mag[p.mag.length-1] &= 0xfffffffe;
+
+    // Use a sieve length likely to contain the next prime number
+    int searchLen = getPrimeSearchLen(bitLength);
+    BitSieve searchSieve = new BitSieve(p, searchLen);
+    BigInteger candidate = searchSieve.retrieve(p, certainty, rnd);
+
+    while ((candidate == null) || (candidate.bitLength() != bitLength)) {
+        p = p.add(BigInteger.valueOf(2*searchLen));
+        if (p.bitLength() != bitLength)
+            p = new BigInteger(bitLength, rnd).setBit(bitLength-1);
+        p.mag[p.mag.length-1] &= 0xfffffffe;
+        searchSieve = new BitSieve(p, searchLen);
+        candidate = searchSieve.retrieve(p, certainty, rnd);
+    }
+    return candidate;
+}
+```
+有興趣可以參考看看自己常用語言的函式庫，通常作法都大同小異，會根據語言特性而做一些不同的優化。
+通常底層還是會使用[Miller–Rabin primality test](https://zh.wikipedia.org/wiki/%E7%B1%B3%E5%8B%92-%E6%8B%89%E5%AE%BE%E6%A3%80%E9%AA%8C)來作為驗證質數的方法，而不是採用類似[AKS](https://en.wikipedia.org/wiki/AKS_primality_test)這種確定性演算法，主要原因還是在於速度上有很大的差異，而且 Miller-Rabin 如果經過多次的驗證，其可靠性已經足夠了。 還有看到一些說法好像是因為硬體的計算因素[\[9\]](https://crypto.stackexchange.com/questions/71/how-can-i-generate-large-prime-numbers-for-rsa)導致，有興趣可以看看。
+
+
+
+### 選擇滿足 RSA 安全性的質數
+上面只討論了如何隨機產生質數，但是 RSA 的
+
+
 ## Reference
-- [How to better generate large primes: sieving and then random picking or random picking and then checking?](https://crypto.stackexchange.com/questions/1812/how-to-better-generate-large-primes-sieving-and-then-random-picking-or-random-p)
-- [擴展歐幾里得算法](https://zh.wikipedia.org/wiki/%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95)
-- [公開金鑰加密 wiki](https://zh.wikipedia.org/wiki/%E5%85%AC%E5%BC%80%E5%AF%86%E9%92%A5%E5%8A%A0%E5%AF%86)
-- [RSA 的原理與實現](https://cjting.me/2020/03/13/rsa/)
-- [看完眼眶濕濕的App開發者慘烈對抗險惡資安環境血與淚的控訴！](https://ithelp.ithome.com.tw/users/20117445/ironman/3778?page=2)
-- [對稱密鑰加密](https://zh.wikipedia.org/wiki/%E5%B0%8D%E7%A8%B1%E5%AF%86%E9%91%B0%E5%8A%A0%E5%AF%86)
-- [Can the encryption exponent e be greater than ϕ(N)?](https://crypto.stackexchange.com/questions/5729/can-the-encryption-exponent-e-be-greater-than-%CF%95n)
+1. [How to better generate large primes: sieving and then random picking or random picking and then checking?](https://crypto.stackexchange.com/questions/1812/how-to-better-generate-large-primes-sieving-and-then-random-picking-or-random-p)
+2. [擴展歐幾里得算法](https://zh.wikipedia.org/wiki/%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95)
+3. [公開金鑰加密 wiki](https://zh.wikipedia.org/wiki/%E5%85%AC%E5%BC%80%E5%AF%86%E9%92%A5%E5%8A%A0%E5%AF%86)
+4. [RSA 的原理與實現](https://cjting.me/2020/03/13/rsa/)
+5. [看完眼眶濕濕的App開發者慘烈對抗險惡資安環境血與淚的控訴！](https://ithelp.ithome.com.tw/users/20117445/ironman/3778?page=2)
+6. [對稱密鑰加密](https://zh.wikipedia.org/wiki/%E5%B0%8D%E7%A8%B1%E5%AF%86%E9%91%B0%E5%8A%A0%E5%AF%86)
+7. [Can the encryption exponent e be greater than ϕ(N)?](https://crypto.stackexchange.com/questions/5729/can-the-encryption-exponent-e-be-greater-than-%CF%95n)
+8. [RSA 生成公私钥时质数是怎么选的？
+](https://www.zhihu.com/question/54779059)
+9. [How can I generate large prime numbers for RSA?](https://crypto.stackexchange.com/questions/71/how-can-i-generate-large-prime-numbers-for-rsa)

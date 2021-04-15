@@ -42,11 +42,11 @@ RSA加密演算法是一種非對稱加密演算法，非對稱加密的特色�
 
   ![](https://latex2image-output.s3.amazonaws.com/img-rNB5W1k7.svg)
 
-所以可以得出
+  所以可以得出
   
   ![](https://latex2image-output.s3.amazonaws.com/img-7sZ11Wd4.svg)
 
-移項得到
+  移項得到
   
   ![](https://latex2image-output.s3.amazonaws.com/img-S7BEqV2x.svg)
 // 待補，接著需要使用擴展歐幾里得算法

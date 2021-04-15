@@ -40,7 +40,7 @@ RSA加密演算法是一種非對稱加密演算法，非對稱加密的特色�
 
 - 計算![](https://latex2image-output.s3.amazonaws.com/img-D6h1FGmQ.svg)相對於![](https://latex2image-output.s3.amazonaws.com/img-YS3FV8Jy.svg)的模反元素![](https://latex2image-output.s3.amazonaws.com/img-5VfEC4JX.svg)拿來當作私鑰
 
-  ![](https://latex2image-output.s3.amazonaws.com/img-GZ2f81vt.svg)
+  ![](https://latex2image-output.s3.amazonaws.com/img-rNB5W1k7.svg)
 
 所以可以得出
   

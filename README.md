@@ -132,12 +132,15 @@ if (p.primeToCertainty(certainty, rnd))
 上面只討論了如何隨機產生質數，但是 RSA 的演算法中包含著兩個質數 ![](https://latex2image-output.s3.amazonaws.com/img-Gq8PVexY.svg)，所以在選擇質數上會有一些額外的限制來確保其安全性。
 
 - RSA 中質數 ![](https://latex2image-output.s3.amazonaws.com/img-Gq8PVexY.svg) 不能距離太接近 [\[10\]](https://link.springer.com/content/pdf/10.1007%2F3-540-68339-9_16.pdf)
+
 如果![](https://latex2image-output.s3.amazonaws.com/img-Gq8PVexY.svg)距離太近，會有快速算法將 ![](image/N.svg) 分解，一般來說如果 ![](image/N.svg) 的位數為 n，那麼![](https://latex2image-output.s3.amazonaws.com/img-DEaUM6vn.svg)要滿足
     - ![](./image/pq12.svg)
     - ![](./image/pq11.svg)
 - RSA 中的 ![](./image/e.svg) 不能太小 [\[11\]](https://link.springer.com/content/pdf/10.1007/s001459900030.pdf)
+
 如果 RSA 中的指數 ![](image/e.svg) 太小，存在快速算法可以得出私鑰 ![](image/d.svg)，但是如果 ![](image/e.svg) 太大會導致加密的過程變慢，所以目前普端認為 ![](image/e65537.svg) 是比較合適的大小。
 - RSA 中的 ![](image/d.svg) 不能太小 [\[12\]](http://jannaud.free.fr/Fichiers/Travail/wiener.pdf)
+
 如果 RSA 中的私鑰 ![](image/d.svg) 太小，存在快速算法得到私鑰 ![](image/d.svg)，一般認為如果合數 ![](image/N.svg) 的位數為 n，那麼 ![](image/d.svg) 要滿足 ![](image/d2n2.svg)
     
 ## Reference

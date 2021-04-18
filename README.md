@@ -62,7 +62,7 @@ RSA加密演算法是一種非對稱加密演算法，非對稱加密的特色�
 
 ### 議題: 如何選擇質數
 
-先討論只選擇一個質數的情況，假設我們今天要一個 $x$ 位元的質數，我們可以隨機挑一個 $x$ 位元的奇數，然後使用質數判斷法來確認隨機選取的數是不是質數。如果不是質數則在重新選取一次。
+先討論只選擇一個質數的情況，假設我們今天要一個 ![](https://latex2image-output.s3.amazonaws.com/img-dC9QCq81.svg) 位元的質數，我們可以隨機挑一個 ![](https://latex2image-output.s3.amazonaws.com/img-dC9QCq81.svg) 位元的奇數，然後使用質數判斷法來確認隨機選取的數是不是質數。如果不是質數則在重新選取一次。
 我一開始看到這種作法會認為隨機挑選應該是很沒有效率的作法，後來查了一些資料，質數的佔比其實比想像中的還要多，詳細數據可以參考[質數計算函數](https://zh.wikipedia.org/wiki/%E7%B4%A0%E6%95%B0%E8%AE%A1%E6%95%B0%E5%87%BD%E6%95%B0)。
 
 如果使用隨機挑選的作法，效能瓶頸就最有可能出現在判斷一個數是不是質數這個動作，參考了一篇文章[\[8\]](https://www.zhihu.com/question/54779059)裡面用 Java 的 [Bouncy Castle lib(一個密碼學相關的函式庫)](https://github.com/bcgit/bc-java) 作為舉例。
@@ -129,9 +129,14 @@ if (p.primeToCertainty(certainty, rnd))
 
 
 ### 選擇滿足 RSA 安全性的質數
-上面只討論了如何隨機產生質數，但是 RSA 的
+上面只討論了如何隨機產生質數，但是 RSA 的演算法中包含著兩個質數 ![](https://latex2image-output.s3.amazonaws.com/img-Gq8PVexY.svg)，所以在選擇質數上會有一些額外的限制來確保其安全性。
 
-
+- RSA中質數![](https://latex2image-output.s3.amazonaws.com/img-Gq8PVexY.svg)不能距離太接近
+如果![](https://latex2image-output.s3.amazonaws.com/img-Gq8PVexY.svg)距離太近，會有快速算法將 N 分解，一般來說如果 N 的位數為 n，那麼![](https://latex2image-output.s3.amazonaws.com/img-DEaUM6vn.svg)要滿足
+    - ![](https://latex2image-output.s3.amazonaws.com/img-Mx9dZf8v.svg)
+    - ![](https://latex2image-output.s3.amazonaws.com/img-NbCQnGAZ.svg)
+    
+    
 ## Reference
 1. [How to better generate large primes: sieving and then random picking or random picking and then checking?](https://crypto.stackexchange.com/questions/1812/how-to-better-generate-large-primes-sieving-and-then-random-picking-or-random-p)
 2. [擴展歐幾里得算法](https://zh.wikipedia.org/wiki/%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95)
@@ -143,3 +148,6 @@ if (p.primeToCertainty(certainty, rnd))
 8. [RSA 生成公私钥时质数是怎么选的？
 ](https://www.zhihu.com/question/54779059)
 9. [How can I generate large prime numbers for RSA?](https://crypto.stackexchange.com/questions/71/how-can-i-generate-large-prime-numbers-for-rsa)
+10. [Coppersmith D. Finding a small root of a bivariate integer equation; factoring with high bits known. EUROCRYPT 1996. pp. 178-189, ACM, 1996.](https://link.springer.com/content/pdf/10.1007%2F3-540-68339-9_16.pdf)
+
+

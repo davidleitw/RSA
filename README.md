@@ -28,27 +28,27 @@ RSA加密演算法是一種非對稱加密演算法，非對稱加密的特色�
 [圖片來源](https://www.techapple.com/archives/25855)
 
 ### 金鑰計算方式
-- 選出兩個較大的質數 ![](https://render.githubusercontent.com/render/math?math=p), ![](https://render.githubusercontent.com/render/math?math=q)
-- 計算兩個質數的乘積 ![](https://render.githubusercontent.com/render/math?math=n\=p*q)
+- 選出兩個較大且不相等的質數 ![](image/pq.svg)
+- 計算兩個質數的乘積 ![](image/npq.svg)
 - 計算出小於 n 且與 n 互質的整數個數
    
-  ![](https://render.githubusercontent.com/render/math?math=\varphi(n)=(p-1)*(q-1))
-- 選擇一個整數 **e**(拿來當作公鑰)
+  ![](image/Npq.svg)
+- 選擇一個整數 ![](image/e.svg)(拿來當作公鑰)
     - 選擇條件
-        - ![](https://latex2image-output.s3.amazonaws.com/img-heUvAk9X.svg)
-        - ![](https://latex2image-output.s3.amazonaws.com/img-VRHdeXUh.svg)互質
+        - ![](image/econdition.svg)
+        - ![](image/econdition2.svg) 互質
 
-- 計算![](https://latex2image-output.s3.amazonaws.com/img-D6h1FGmQ.svg)相對於![](https://latex2image-output.s3.amazonaws.com/img-YS3FV8Jy.svg)的模反元素![](https://latex2image-output.s3.amazonaws.com/img-5VfEC4JX.svg)拿來當作私鑰
+- 計算 ![](image/e.svg) 相對於 ![](image/varphiN.svg) 的模反元素 ![](image/d.svg) 拿來當作私鑰
   
-  ![](https://latex2image-output.s3.amazonaws.com/img-rNB5W1k7.svg)
+  ![](image/com.svg)
 
   所以可以得出
 
-  ![](https://latex2image-output.s3.amazonaws.com/img-7sZ11Wd4.svg)
+  ![](image/com2.svg)
 
   移項得到
 
-  ![](https://latex2image-output.s3.amazonaws.com/img-S7BEqV2x.svg)
+  ![](image/com3.svg)
 
   // 待補，接著需要使用擴展歐幾里得算法
 
@@ -57,12 +57,12 @@ RSA加密演算法是一種非對稱加密演算法，非對稱加密的特色�
 [來源](https://ithelp.ithome.com.tw/articles/10250721)
 
 經過上述求金鑰的過程，可以得到
-- 公鑰 ![](https://latex2image-output.s3.amazonaws.com/img-MWWWYstf.svg)
-- 私鑰 ![](https://latex2image-output.s3.amazonaws.com/img-qJFBdKjw.svg)
+- 公鑰 ![](image/en.svg)
+- 私鑰 ![](image/dn.svg)
 
 ### 議題: 如何選擇質數
 
-先討論只選擇一個質數的情況，假設我們今天要一個 ![](https://latex2image-output.s3.amazonaws.com/img-dC9QCq81.svg) 位元的質數，我們可以隨機挑一個 ![](https://latex2image-output.s3.amazonaws.com/img-dC9QCq81.svg) 位元的奇數，然後使用質數判斷法來確認隨機選取的數是不是質數。如果不是質數則在重新選取一次。
+先討論只選擇一個質數的情況，假設我們今天要一個 ![](image/n.svg) 位元的質數，我們可以隨機挑一個 ![](image/n.svg) 位元的奇數，然後使用質數判斷法來確認隨機選取的數是不是質數。如果不是質數則在重新選取一次。
 我一開始看到這種作法會認為隨機挑選應該是很沒有效率的作法，後來查了一些資料，質數的佔比其實比想像中的還要多，詳細數據可以參考[質數計算函數](https://zh.wikipedia.org/wiki/%E7%B4%A0%E6%95%B0%E8%AE%A1%E6%95%B0%E5%87%BD%E6%95%B0)。
 
 如果使用隨機挑選的作法，效能瓶頸就最有可能出現在判斷一個數是不是質數這個動作，參考了一篇文章[\[8\]](https://www.zhihu.com/question/54779059)裡面用 Java 的 [Bouncy Castle lib(一個密碼學相關的函式庫)](https://github.com/bcgit/bc-java) 作為舉例。
@@ -143,6 +143,9 @@ if (p.primeToCertainty(certainty, rnd))
 
 如果 RSA 中的私鑰 ![](image/d.svg) 太小，存在快速算法得到私鑰 ![](image/d.svg)，一般認為如果合數 ![](image/N.svg) 的位數為 n，那麼 ![](image/d.svg) 要滿足 ![](image/d2n2.svg)
     
+### 加密與解密
+
+
 ## Reference
 1. [How to better generate large primes: sieving and then random picking or random picking and then checking?](https://crypto.stackexchange.com/questions/1812/how-to-better-generate-large-primes-sieving-and-then-random-picking-or-random-p)
 2. [擴展歐幾里得算法](https://zh.wikipedia.org/wiki/%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95)

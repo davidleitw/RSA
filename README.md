@@ -133,8 +133,8 @@ if (p.primeToCertainty(certainty, rnd))
 
 - RSA中質數![](https://latex2image-output.s3.amazonaws.com/img-Gq8PVexY.svg)不能距離太接近
 如果![](https://latex2image-output.s3.amazonaws.com/img-Gq8PVexY.svg)距離太近，會有快速算法將 N 分解，一般來說如果 N 的位數為 n，那麼![](https://latex2image-output.s3.amazonaws.com/img-DEaUM6vn.svg)要滿足
-    - ![](https://latex2image-output.s3.amazonaws.com/img-Mx9dZf8v.svg)
-    - ![](https://latex2image-output.s3.amazonaws.com/img-NbCQnGAZ.svg)
+    - ![](./image/pq12.svg)
+    - ![](./image/pq11.svg)
     
     
 ## Reference

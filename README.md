@@ -145,6 +145,25 @@ if (p.primeToCertainty(certainty, rnd))
     
 ### 加密與解密
 
+由於 RSA 的演算法是針對數值做加解密，所以一般加密用到的字串需要使用 ASCII, unicode code, UTF-8等編碼形式將字串轉換成數字。
+
+轉換後的數字 x 需要小於金鑰中的 ![](image/n.svg)，當需要加密的資料太大時，會分割資料，分組加密。
+
+#### 加密
+公鑰 ![](image/en.svg) 對 ![](image/x.svg) (message) 加密，可寫成:
+
+![](image/excrypt.svg)
+
+![](image/y.svg) 為加密後的密文
+
+#### 解密
+
+私鑰 ![](image/dn.svg) 可以對密文 ![](image/y.svg) 解密，可寫成
+
+![](image/decrypt.svg)
+
+![](image/x.svg) 為原始訊息
+
 
 ## Reference
 1. [How to better generate large primes: sieving and then random picking or random picking and then checking?](https://crypto.stackexchange.com/questions/1812/how-to-better-generate-large-primes-sieving-and-then-random-picking-or-random-p)

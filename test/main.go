@@ -8,6 +8,7 @@ import (
 )
 
 func main() {
+	// generate key
 	public, private, err := RSA.GenerateRSAKey()
 	if err != nil {
 		log.Println(err)

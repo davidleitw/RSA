@@ -129,7 +129,7 @@ if (p.primeToCertainty(certainty, rnd))
 
 
 ### 選擇滿足 RSA 安全性的質數
-上面只討論了如何隨機產生質數，但是 RSA 的演算法中包含著兩個質數 ![](https://latex2image-output.s3.amazonaws.com/img-Gq8PVexY.svg)，所以在選擇質數上會有一些額外的限制來確保其安全性。
+上面只討論了如何隨機產生質數，但是 RSA 的演算法中包含著兩個質數 ![](https://latex2image-output.s3.amazonaws.com/img-Gq8PVexY.svg)，所以在選擇質數上會有一些額外的限制來確保其安全性。這邊僅討論一些最基本的原則，如果要自己實作的話會有更多的規範可以參考，有興趣可以延伸閱讀一些規範。
 
 - RSA 中質數 ![](https://latex2image-output.s3.amazonaws.com/img-Gq8PVexY.svg) 不能距離太接近 [\[10\]](https://link.springer.com/content/pdf/10.1007%2F3-540-68339-9_16.pdf)
 
@@ -163,6 +163,24 @@ if (p.primeToCertainty(certainty, rnd))
 ![](image/decrypt.svg)
 
 ![](image/x.svg) 為原始訊息
+
+### 實作
+雖然 go 語言內建強大的 crypto library，實現了大部分的加解密演算法，但是這邊我們就根據上面加解密的步驟做一個簡單的實驗來看看加密過後的訊息是否可以正確的還原成原本的訊息。
+
+#### Public, Private key 定義
+```go
+type PublicKey struct {
+	N *big.Int
+	E *big.Int
+}
+
+type PrivateKey struct {
+	N *big.Int
+	D *big.Int
+}
+```
+金鑰部份我們使用 `math/big` 裡面的大數宣告
+
 
 
 ## Reference
